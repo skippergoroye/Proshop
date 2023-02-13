@@ -1,0 +1,15 @@
+{
+  "name": "proshop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -L backend/server"
+  },
+  "repository": "https://github.com/skippergoroye/Proshop.git",
+  "author": "skippergoroye <oluwatosinadegoroye21@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
