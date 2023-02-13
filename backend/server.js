@@ -1,5 +1,5 @@
 const express = require('express')
-const products = require('./data/products')
+const products = require('./data/products.js')
 
 
 const app = express()
@@ -20,10 +20,15 @@ app.get('/api/products', (req, res) => {
 })
 
 app.get('/api/products/:id', (req, res) => {
-    const product = products.find((p) => p._id === req.params.id);
-    res.json(product)       //res.data
+    const singleTask = products.find(product => product._id === req.params.id);
+    res.json({singleTask})
+    // const product = products.find(p => p._id === req.params._id);
+    // res.json(product)       // res.data
     // res.json({product}) res.data.products
 })
+
+
+
 
 
 app.listen(5000, console.log(`Server running on port 5000`))

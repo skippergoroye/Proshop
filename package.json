@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -L backend/server"
+    "start": "node -L backend/server",
+    "server": "nodemon backend/server",
+    "client": "cd frontend && yarn start",
+    "dev": "concurrently  \"yarn server\" \"yarn client\" "
   },
   "repository": "https://github.com/skippergoroye/Proshop.git",
   "author": "skippergoroye <oluwatosinadegoroye21@gmail.com>",
@@ -11,5 +14,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
   }
 }
