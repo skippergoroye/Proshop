@@ -1,11 +1,13 @@
 import express from 'express'
-import products from './data/products.js'
+// import products from './data/products.js'
+import connectDB from './config/db.js'
+import productRoutes from './routes/productRoutes.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
 const app = express()
 
-// app.use(cors())
+connectDB()
 
 app.use(express.json())
 
@@ -16,17 +18,23 @@ app.get('/', (req, res) => {
 })
 
 
-app.get('/api/products', (req, res) => {
-    res.json({products})
-})
+app.use('/api/products', productRoutes)
 
-app.get('/api/products/:id', (req, res) => {
-    const singleTask = products.find(product => product._id === req.params.id);
-    res.json({singleTask})
-    // const product = products.find(p => p._id === req.params._id);
-    // res.json(product)       // res.data
-    // res.json({product}) res.data.products
-})
+
+// app.get('/api/products', (req, res) => {
+//     res.json({products})
+// })
+
+// app.get('/api/products/:id', (req, res) => {
+//     const singleTask = products.find(product => product._id === req.params.id);
+//     res.json({singleTask})
+
+
+
+//     // const product = products.find(p => p._id === req.params._id);
+//     // res.json(product)       // res.data
+//     // res.json({product}) res.data.products
+// })
 
 
 const PORT = process.env.PORT || 3000

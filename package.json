@@ -7,15 +7,20 @@
     "start": "node -L backend/server",
     "server": "nodemon backend/server",
     "client": "cd frontend && yarn start",
-    "dev": "concurrently  \"yarn server\" \"yarn client\" "
+    "dev": "concurrently  \"yarn server\" \"yarn client\" ",
+    "data:import": "node backend/seeder",
+    "data:destory": "node backend/seeder -d"
   },
   "repository": "https://github.com/skippergoroye/Proshop.git",
   "author": "skippergoroye <oluwatosinadegoroye21@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^6.9.1"
   },
   "devDependencies": {
     "concurrently": "^7.6.0",
