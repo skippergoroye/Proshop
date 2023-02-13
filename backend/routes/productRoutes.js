@@ -3,7 +3,6 @@ import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js'
 
 
-
 const router = express.Router()
 
 // @desc Fetch all products
@@ -22,7 +21,7 @@ router.get('/', asyncHandler(async (req, res) => {
 // @route GET /api/product/:id
 // access Public
 router.get('/:id', asyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params._id)
+    const product = await Product.findById(req.params.id)
 
     if(product) {
         res.json(product)
