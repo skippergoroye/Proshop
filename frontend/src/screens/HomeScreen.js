@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import Product from "../components/Product";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+
 import { useDispatch, useSelector } from "react-redux";
-import {getProducts} from '../features/products/productSlice.js'
+import { getProducts } from '../features/products/productSlice.js'
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.products);
-  const { isLoading, isError, message, products } = productList;
+  const { isLoading, isError, products } = productList;
 
   useEffect(() => {
     dispatch(getProducts());
@@ -37,14 +40,16 @@ const HomeScreen = () => {
     <>
       <h1>Lastest product</h1>
       {isLoading ? (
-        <h2>Loading...</h2>
+        <Loader />
+        // <h2>Loading...</h2>
       ) : isError ? (
-        <h3>{message}</h3>
+        // <h3>{message}</h3>
+        <Message variant='danger'>{isError}</Message>
       ) : (
         <Row>
-          {products && products.map((product) => (
+          {products.map((product) => (
             <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-              <Product  product={product} />
+              <Product product={product} />
             </Col>
           ))}
         </Row>

@@ -98,6 +98,6 @@ export const productsSlice = createSlice({
 })
 
 
-export const {reset} = productsSlice.actions
+export const { reset } = productsSlice.actions
 
 export default productsSlice.reducer
