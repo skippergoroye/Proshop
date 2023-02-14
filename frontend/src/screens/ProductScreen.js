@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Row,
@@ -10,31 +10,46 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import Rating from "../components/Rating";
-import axios from 'axios'
+import { useDispatch, useSelector } from "react-redux";
+import { getSingleProducts } from "../features/products/productSlice";
+
 
 
 const ProductScreen = () => {
-  
-  
-  const [product, setProduct] = useState([])
-  
-  // const { id } = useParams()
-  const params = useParams();
+  const dispatch = useDispatch();
 
+  const productDetails = useSelector((state) => state.product);
+  const { product } = productDetails;
+
+  const params = useParams()
 
   useEffect(() => {
-    const fetchSingleProduct = async () => {
-      const res = await axios.get(`/api/products/${params.id}`)
-      setProduct(res.data)
-      // console.log(res)
+    dispatch(getSingleProducts(params.id));
+  }, [dispatch, params.id]);
+
+
+   
+
+
+  // import axios from 'axios'
+  // const [product, setProduct] = useState([])
+  
+  // const { id } = useParams()
+  // const params = useParams();
+
+  // useEffect(() => {
+  //   const fetchSingleProduct = async () => {
+  //     const res = await axios.get(`/api/products/${params.id}`)
+  //     setProduct(res.data)
+  //     console.log(res)
 
       
-      // const { data } = await axios.get(`/api/products/${params.id}`)
-      // setProduct(data)
-      // console.log(data)
-    }
-    fetchSingleProduct()
-  }, [params.id])
+  //     const { data } = await axios.get(`/api/products/${params.id}`)
+  //     setProduct(data)
+  //     console.log(data)
+  //   }
+  //   fetchSingleProduct()
+  // }, [params.id])
 
 
 

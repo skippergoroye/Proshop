@@ -2,6 +2,8 @@ import express from 'express'
 // import products from './data/products.js'
 import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
+import morgan from 'morgan';
+import cors from 'cors';
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -11,7 +13,11 @@ connectDB()
 
 app.use(express.json())
 
+app.use(cors())
+
 app.use(express.urlencoded({ extended: true}))
+
+app.use(morgan('dev'))
 
 app.get('/', (req, res) => {
     res.send("API is running....")
