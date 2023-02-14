@@ -24,8 +24,8 @@ const getSingleProducts = async(id, token) => {
     }
 
     const response = await axios.get(`${Base_URL}/api/products/${id}`, config)
-    console.log(response)
-    console.log(response.data.products)
+    // console.log(response)
+    // console.log(response.data)
     return response.data;
 } 
 
