@@ -2,6 +2,7 @@ import express from 'express'
 // import products from './data/products.js'
 import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 import morgan from 'morgan';
 import cors from 'cors';
 import dotenv from 'dotenv'
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 
 
 app.use('/api/products', productRoutes)
+app.use('/api/users', userRoutes)
 
 
 // app.get('/api/products', (req, res) => {
