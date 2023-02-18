@@ -4,6 +4,8 @@ import Product from "../components/Product";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
+
+// Redux
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from '../features/products/productSlice.js'
 

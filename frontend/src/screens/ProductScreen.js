@@ -11,9 +11,11 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import Rating from "../components/Rating";
+
 // new Redux
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProducts } from "../features/products/productSlice";
+import { addItem } from '../features/cart/cartSlice';
 
 
  //old Redux
@@ -25,7 +27,7 @@ import { getSingleProducts } from "../features/products/productSlice";
 
 const ProductScreen = () => {
   const navigate = useNavigate()
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
 
@@ -39,7 +41,10 @@ const ProductScreen = () => {
   }, [dispatch, params.id]);
 
   const addToCartHandler = () => {
-    navigate(`/cart/${params.id}?qty=${qty}`)
+    dispatch(addItem(product))
+    setTimeout(()=>{
+      navigate(`/cart/${params.id}?qty=${qty}`)
+    }, 1000)
   }
 
 
