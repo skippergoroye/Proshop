@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import cartService from "./cartService";
+import { createSlice } from "@reduxjs/toolkit";
+// import cartService from "./cartService";
 
 
 const cartItemsFromStorage = localStorage.getItem("cart")
@@ -33,12 +33,12 @@ export const cartSlice = createSlice({
       removeItem: (state, action)=> {
         // state.cart = [...state.cart, action.payload];
         const itemId = action.payload
-        state.cart = state.cart.filter((item) => item.id !== itemId.id);
+        state.cart = state.cart.filter((item) => item.id !== itemId);
         console.log(action)
     },
     },
   extraReducers: (builder) => {
-
+    
   },
 });
 

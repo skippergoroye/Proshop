@@ -7,7 +7,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 
 
 const initialState = {
-  userLogin: userInfoFromStorage,
+  userInfo: userInfoFromStorage,
   isSuccess: false,
   isLoading: false,
   isError: false,

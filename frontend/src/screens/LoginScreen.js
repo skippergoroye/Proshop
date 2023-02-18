@@ -12,8 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../features/auth/authSlice";
 
 const Login = () => {
-
-const location = useLocation();
+    const location = useLocation();
     const navigate = useNavigate()
     const redirect = location.search ? location.search.split('=')[1] : '/'
 
@@ -21,7 +20,7 @@ const location = useLocation();
     const dispatch = useDispatch()
 
     const userLoginDetails = useSelector((state) => state.userLogin);
-    const { isLoading, isError, isSuccess, message, userLogin } = userLoginDetails
+    const { isLoading, isError, isSuccess, message, userInfo } = userLoginDetails
 
     const [formData, setFormData] = useState({
     email: "",
@@ -42,11 +41,11 @@ const location = useLocation();
       toast.error(message)
     }
 
-    if(isSuccess || userLogin) {
+    if(isSuccess || userInfo ) {
       navigate(redirect)
       toast.success("Login Successfull");
     }
-  }, [navigate, isSuccess, isError, message, userLogin, redirect])
+  }, [navigate, isSuccess, isError, message, userInfo, redirect])
 
   const submitHandler = (e) => {
   e.preventDefault();
