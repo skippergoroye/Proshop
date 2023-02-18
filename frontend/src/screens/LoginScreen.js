@@ -77,7 +77,7 @@ const Login = () => {
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label>Password Address</Form.Label>
           <Form.Control 
               type="password" 
               name="password"
