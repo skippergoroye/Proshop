@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col  } from "react-bootstrap";
+import { toast } from "react-toastify"
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
@@ -20,7 +21,7 @@ const location = useLocation();
     const dispatch = useDispatch()
 
     const userLoginDetails = useSelector((state) => state.userLogin);
-    const { isLoading, isError, isSuccess, message } = userLoginDetails
+    const { isLoading, isError, isSuccess, message, userLogin } = userLoginDetails
 
     const [formData, setFormData] = useState({
     email: "",
@@ -37,20 +38,27 @@ const location = useLocation();
   }
 
   useEffect(() => {
-    if(isSuccess) {
-      navigate(redirect)
+    if(isError) {
+      toast.error(message)
     }
-  }, [navigate, isSuccess, redirect])
 
-    const submitHandler = (e) => {
-    e.preventDefault();
+    if(isSuccess || userLogin) {
+      navigate(redirect)
+      toast.success("Login Successfull");
+    }
+  }, [navigate, isSuccess, isError, message, userLogin, redirect])
 
-    const userData = {
-        email,
-        password,
-    };
-    dispatch(login(userData));
-    };
+  const submitHandler = (e) => {
+  e.preventDefault();
+
+  const userData = {
+      email,
+      password,
+  };
+  dispatch(login(userData));
+  // toast.success(data.message);
+  // toast.success("Login Successful")
+  };
 
   return (
     <FormContainer>

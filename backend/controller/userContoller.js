@@ -19,6 +19,7 @@ const authUser = asyncHandler(async (req, res) => {
             email: user.email,
             isAdmin: user.isAdmin,
             token: generateToken(user._id),
+            message: "login successful"
         })
     } else {
         res.status(401)
