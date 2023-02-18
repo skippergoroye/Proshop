@@ -31,10 +31,6 @@ const authUser = asyncHandler(async (req, res) => {
 
 
 
-
-
-
-
 // @desc   Register  anew user
 // @route  POST /api/users
 // access  Public
@@ -53,8 +49,6 @@ const registerUser = asyncHandler(async (req, res) => {
         email,
         password,
     })
-
-
     if(user) {
         res.status(201).json({
             _id: user._id,
