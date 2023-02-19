@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col  } from "react-bootstrap";
-// import { toast } from "react-toastify"
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
@@ -22,45 +21,36 @@ const ProfileScreen = () => {
     const { userInfo } = userLoginDetails
 
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
+    const [formData, setFormData] = useState({
+      name: "",
+      email: "",
+      password: "",
+      confirm_password: "",
+    })
     const [text, setText] = useState('')
 
-    // const [formData, setFormData] = useState({
-    //   name: "",
-    //   email: "",
-    //   password: "",
-    //   confirm_password: "",
-    // });
-    // const { name, email, password, confirm_password } = formData 
+    const { name, email, password, confirm_password } = formData 
 
-    // const handleChange = (e) => {
-    //   setFormData((prevState) => ({
-    //     ...prevState,
-    //     [e.target.name]: e.target.value
-    //   }))
-    // }
-
-
-
-
+    const handleChange = (e) => {
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+      }))
+    }
 
   useEffect(() => {
-    // if(isError) {
-    //   toast.error(message)
-    // }
-
     if(!userInfo ) {
       navigate('/login')
     } else {
-        if(!userInfo.name){
-          dispatch(getUserDetails('profile'))
-        } else{
-          setName(userInfo.name)
-          setEmail(userInfo.email)
-        }
+      if(!userInfo.name){
+        dispatch(getUserDetails('profile'))
+      } else{
+        setFormData((prev) =>({
+          ...prev,
+          name: userInfo.name  ,
+          email: userInfo.email,
+        }))
+      }
     }
   }, [dispatch, navigate, isSuccess, userInfo, userInfo.name, userInfo.email])
 
@@ -68,7 +58,7 @@ const ProfileScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if(password !== confirmPassword) {
+    if(password !== confirm_password) {
         setText('Password do not match')
     } else {
         dispatch()
@@ -93,7 +83,7 @@ const ProfileScreen = () => {
                     name="name"
                     value={name}
                     placeholder="Enter Name"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={handleChange}
                     ></Form.Control>
                 </Form.Group>
 
@@ -104,7 +94,7 @@ const ProfileScreen = () => {
                     name="email"
                     value={email}
                     placeholder="Enter Email"
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={handleChange}
                     ></Form.Control>
                 </Form.Group>
 
@@ -115,7 +105,7 @@ const ProfileScreen = () => {
                     name="password"
                     value={password}
                     placeholder="Enter Password"
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={handleChange}
                     ></Form.Control>
                 </Form.Group>
 
@@ -123,10 +113,10 @@ const ProfileScreen = () => {
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control 
                     type="password" 
-                    name="confirmPassword"
-                    value={confirmPassword}
+                    name="confirm_password"
+                    value={confirm_password}
                     placeholder="Confirm Password"
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={handleChange}
                     ></Form.Control>
                 </Form.Group>
 
@@ -134,8 +124,8 @@ const ProfileScreen = () => {
                 Update
             </Button>
           </Form>
-
         </Col>
+
         <Col md={9}>
            <h2>My Orders</h2>
         </Col>
