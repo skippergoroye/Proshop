@@ -4,6 +4,7 @@ import productReducer from '../features/products/productSlice'
 import cartReducer from '../features/cart/cartSlice'
 import userLoginReducer from '../features/auth/authSlice' 
 import userRegisterReducer from '../features/auth/authSlice'
+import userDetailsReducer from '../features/auth/authSlice'
 
 
 export const store = configureStore ({
@@ -13,5 +14,6 @@ export const store = configureStore ({
         cart: cartReducer,
         userLogin: userLoginReducer,
         userRegister: userRegisterReducer,
+        userDetails: userDetailsReducer,
     }
 })

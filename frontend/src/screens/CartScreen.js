@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Message from "../components/Message";
 import { Row, Col, ListGroup, Image, Form, Button, ListGroupItem, Card } from "react-bootstrap";
-import {addItem} from '../features/cart/cartSlice';
-import { getSingleProducts } from "../features/products/productSlice";
+// import {addItem} from '../features/cart/cartSlice';
+// import { getSingleProducts } from "../features/products/productSlice";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { removeItem } from '../features/cart/cartSlice';
-// import { addToCart } from "../features/cart/cartSlice";
+import { addToCart } from "../features/cart/cartSlice";
 
-const CartScreen = ({ id }) => {
+const CartScreen = () => {
 
   const dispatch = useDispatch();
-  const params = useParams();
+  // const params = useParams();
   
   const location = useLocation();
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
@@ -87,7 +87,7 @@ const CartScreen = ({ id }) => {
                     <Button
                       type="button"
                       variant="light"
-                      onClick={()=> {dispatch(removeItem(params.id))}}
+                      onClick={()=> {dispatch(removeItem())}}
                     >
                       <i className="fas fa-trash"></i>
                     </Button>

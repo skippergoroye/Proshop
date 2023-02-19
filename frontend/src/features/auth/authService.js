@@ -3,6 +3,7 @@ import axios from 'axios'
 const Base_URL = process.env.REACT_APP_BASE_URL
 
 
+
 // Register User
 const register = async(userData) => {
     const response = await axios.post(`${Base_URL}/api/users`, userData)
@@ -11,6 +12,8 @@ const register = async(userData) => {
     }
     return response.data
 }
+
+
 
 
 // Login User
@@ -23,10 +26,33 @@ const login = async(userData) => {
 }
 
 
+
+
+// Register User
+const getUserDetails = (id) => async( token, getState ) => {
+    const { userLogin: { userInfo }} = getState()
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+        },
+    }
+
+
+    const response = await axios.get(`${Base_URL}/api/users/${id}`, config)
+    return response.data
+}
+
+
+
+
+
 // Logout
 const logout = async() => {
     localStorage.removeItem('userInfo')
 }
+
+
 
 
 // Logout user
@@ -38,7 +64,8 @@ const logout = async() => {
 const authService = {
     login,
     logout,
-    register
+    register,
+    getUserDetails
 }
 
 

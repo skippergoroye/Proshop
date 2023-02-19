@@ -12,8 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../features/auth/authSlice";
 
 const Register = () => {
-    const location = useLocation();
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  
+  const location = useLocation();
     const redirect = location.search ? location.search.split('=')[1] : '/'
 
 
@@ -49,7 +50,7 @@ const Register = () => {
       navigate(redirect)
       toast.success("Register Successfull");
     }
-  }, [navigate, isSuccess, isError, message, userInfo, redirect])
+  }, [navigate, isSuccess, isError, message, userInfo, redirect. dispatch])
 
     const submitHandler = (e) => {
         e.preventDefault();

@@ -2,10 +2,11 @@ import React from "react";
 import PropTypes from 'prop-types'
 
 
-
 const Rating = ({ value, text, color }) => {
   return (
     <div>
+
+      
       <span>
         <i 
           style={{ color }}
@@ -18,6 +19,8 @@ const Rating = ({ value, text, color }) => {
           }
         ></i>
       </span>
+
+
       <span>
         <i 
           style={{ color }}
@@ -30,6 +33,8 @@ const Rating = ({ value, text, color }) => {
           }
         ></i>
       </span>
+
+
       <span>
         <i 
           style={{ color }}
@@ -42,6 +47,8 @@ const Rating = ({ value, text, color }) => {
           }
         ></i>
       </span>
+
+
       <span>
         <i 
           style={{ color }}
@@ -54,6 +61,8 @@ const Rating = ({ value, text, color }) => {
           }
         ></i>
       </span>
+
+
       <span>
         <i 
           style={{ color}}
