@@ -50,7 +50,7 @@ const Register = () => {
       navigate(redirect)
       toast.success("Register Successfull");
     }
-  }, [navigate, isSuccess, isError, message, userInfo, redirect. dispatch])
+  }, [navigate, isSuccess, isError, message, userInfo, redirect, dispatch])
 
     const submitHandler = (e) => {
         e.preventDefault();

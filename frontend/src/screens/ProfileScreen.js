@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col  } from "react-bootstrap";
-import { toast } from "react-toastify"
+// import { toast } from "react-toastify"
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
@@ -16,32 +16,32 @@ const ProfileScreen = () => {
     const navigate = useNavigate()
 
     const userProfileDetails = useSelector((state) => state.userDetails);
-    const { isLoading, isError, isSuccess, message, user } = userProfileDetails
+    const { isLoading, isError, isSuccess, message } = userProfileDetails
 
     const userLoginDetails = useSelector((state) => state.userLogin);
     const { userInfo } = userLoginDetails
 
 
- 
-    const [text, setText] = useState("")
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [text, setText] = useState('')
 
-    const [formData, setFormData] = useState({
-      name: "",
-      email: "",
-      password: "",
-      confirm_password: "",
-    });
+    // const [formData, setFormData] = useState({
+    //   name: "",
+    //   email: "",
+    //   password: "",
+    //   confirm_password: "",
+    // });
+    // const { name, email, password, confirm_password } = formData 
 
-
-    const { name, email, password, confirm_password } = formData 
-    
-    
-    const handleChange = (e) => {
-      setFormData((prevState) => ({
-        ...prevState,
-        [e.target.name]: e.target.value
-      }))
-    }
+    // const handleChange = (e) => {
+    //   setFormData((prevState) => ({
+    //     ...prevState,
+    //     [e.target.name]: e.target.value
+    //   }))
+    // }
 
 
 
@@ -55,23 +55,26 @@ const ProfileScreen = () => {
     if(!userInfo ) {
       navigate('/login')
     } else {
-        if(!user.name){
+        if(!userInfo.name){
           dispatch(getUserDetails('profile'))
         } else{
-
+          setName(userInfo.name)
+          setEmail(userInfo.email)
         }
     }
-  }, [navigate, isSuccess, userInfo])
+  }, [dispatch, navigate, isSuccess, userInfo, userInfo.name, userInfo.email])
+
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if(password !== confirm_password) {
+    if(password !== confirmPassword) {
         setText('Password do not match')
     } else {
-        dispatch(register(userData))
+        dispatch()
     }
   };
+
 
   return (
      <Row>
@@ -90,7 +93,7 @@ const ProfileScreen = () => {
                     name="name"
                     value={name}
                     placeholder="Enter Name"
-                    onChange={handleChange}
+                    onChange={(e) => setName(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
 
@@ -101,7 +104,7 @@ const ProfileScreen = () => {
                     name="email"
                     value={email}
                     placeholder="Enter Email"
-                    onChange={handleChange}
+                    onChange={(e) => setEmail(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
 
@@ -112,7 +115,7 @@ const ProfileScreen = () => {
                     name="password"
                     value={password}
                     placeholder="Enter Password"
-                    onChange={handleChange}
+                    onChange={(e) => setPassword(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
 
@@ -120,10 +123,10 @@ const ProfileScreen = () => {
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control 
                     type="password" 
-                    name="confirm_password"
-                    value={confirm_password}
+                    name="confirmPassword"
+                    value={confirmPassword}
                     placeholder="Confirm Password"
-                    onChange={handleChange}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
 
