@@ -25,7 +25,7 @@ const CartScreen = () => {
   const { cart } = cartItems;
 
 
-  console.log(cartItems)
+  console.log(cart)
   
 
  
@@ -68,7 +68,7 @@ const CartScreen = () => {
                   <Col md={2}>
                     <Form.Control
                       as="select"
-                      value={item.qty}
+                      value={qty}
                       onChange={(e) =>
                         dispatch(
                           // addToCart(item.product, Number(e.target.value))
