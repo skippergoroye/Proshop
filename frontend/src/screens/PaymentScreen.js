@@ -1,19 +1,26 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps"
-import saveShippingAddress from '../features/cart/cartSlice'
+
+
+import savePaymentMethod from '../features/cart/cartSlice'
+import { useLocation, useNavigate } from "react-router-dom";
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 
-const ShippingScreen = () => {
+const PaymentScreen = () => {
 
   const navigate = useNavigate()
 
   const cart = useSelector((state) => state.cart)
   const { shippingAddress } = cart
+
+
+  if(!shippingAddress) {
+    navigate('/shipping')
+  }
 
 
   const dispatch = useDispatch()
@@ -119,4 +126,4 @@ const ShippingScreen = () => {
   )
 }
 
-export default ShippingScreen
+export default PaymentScreen
