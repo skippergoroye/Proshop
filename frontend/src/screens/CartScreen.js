@@ -24,8 +24,7 @@ const CartScreen = () => {
   const cartItems = useSelector((state) => state.cart);
   const { cart } = cartItems;
 
-
-  console.log(cart)
+  // console.log(cart)
   
 
  
@@ -38,7 +37,7 @@ const CartScreen = () => {
   // }
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping')
+    navigate('/shipping')
     // console.log('checkout')
   }
 

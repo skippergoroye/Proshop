@@ -53,7 +53,7 @@ const ProfileScreen = () => {
       } else{
         setFormData((prev) =>({
           ...prev,
-          name: userInfo.name  ,
+          name: userInfo.name,
           email: userInfo.email,
         }))
       }

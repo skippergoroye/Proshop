@@ -11,6 +11,7 @@ import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import ProfileScreen from './screens/ProfileScreen'
+import ShippingScreen from './screens/ShippingScreen'
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
         <Container>
         <ToastContainer />
           <Routes>
+            <Route path='/shipping' element={<ShippingScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
