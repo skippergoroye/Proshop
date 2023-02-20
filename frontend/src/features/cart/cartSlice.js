@@ -30,12 +30,12 @@ export const cartSlice = createSlice({
           }
         }
       },
-      removeItem: (state, action)=> {
-        // state.cart = [...state.cart, action.payload];
-        const itemId = action.payload
-        state.cart = state.cart.filter((item) => item.id !== itemId);
+      removeItem: (state, action) => {
         console.log(action)
-    },
+        const itemId = action.payload
+        state.cart = state.cart.filter((item) => item._id !== itemId);
+        localStorage.setItem('cart', JSON.stringify(state.cart))
+      },
     },
   extraReducers: (builder) => {
     

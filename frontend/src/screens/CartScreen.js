@@ -56,13 +56,13 @@ const CartScreen = () => {
         ) : (
           <ListGroup variant="flush">
             {cart && Array.isArray(cart) && cart?.map((item) => (
-              <ListGroup.Item key={item.product}>
+              <ListGroup.Item key={item._id}>
                 <Row>
                   <Col md={2}>
                     <Image src={item.image} alt={item.name} fluid rounded />
                   </Col>
                   <Col md={3}>
-                    <Link to={`/product/${item.product}`}>{item.name}</Link>
+                    <Link to={`/product/${item._id}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>${item.price}</Col>
                   <Col md={2}>
@@ -87,7 +87,7 @@ const CartScreen = () => {
                     <Button
                       type="button"
                       variant="light"
-                      onClick={()=> {dispatch(removeItem())}}
+                      onClick={()=> {dispatch(removeItem(item._id))}}
                     >
                       <i className="fas fa-trash"></i>
                     </Button>
@@ -102,6 +102,7 @@ const CartScreen = () => {
         <Card>
           <ListGroup variant='flush'>
             <ListGroupItem>
+              {/* <h2>Subtotal ({cart.reduce((acc, item)=> acc + item.qty, 0)}) items</h2> */}
               <h2>SubTotal ({cart && Array.isArray(cart) && cart?.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
               ${cart && Array.isArray(cart) && cart?.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
             </ListGroupItem>

@@ -8,7 +8,6 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 
 const initialState = {
   userInfo: userInfoFromStorage,
-  user: {},
   isSuccess: false,
   isLoading: false,
   isError: false,
@@ -73,6 +72,23 @@ export const getUserDetails = createAsyncThunk('auth/getuser', async (user, thun
 
 
 
+// Update Users
+export const updateUserProfile = createAsyncThunk('auth/getuser', async (user, thunkAPI) => {
+  try {
+     return await authService.getUserDetails(user)
+  } catch (error) {
+    const message =
+    (error.response && error.response.data && error.response.data.message) 
+    || error.message 
+    || error.toString();
+  return thunkAPI.rejectWithValue(message);
+  }
+  // console.log(user);
+})
+
+
+
+
 // Logout
 export const logout = createAsyncThunk("auth/logout", async () => {
    await authService.logout()
@@ -121,20 +137,20 @@ export const authSlice = createSlice({
         state.userInfo = action.payload;
       })
       // Update User
-      // .addCase(register.pending, (state) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(register.rejected, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isError = true;
-      //   state.message = action.payload;
-      //   state.userInfo = null;
-      // })
-      // .addCase(register.fulfilled, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isSuccess = true;
-      //   state.userInfo = action.payload;
-      // })
+      .addCase(updateUserProfile.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.userInfo = null;
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.userInfo = action.payload;
+      })
       // Logout
       .addCase(logout.fulfilled, (state) => {
         state.userInfo = null;

@@ -28,7 +28,7 @@ const login = async(userData) => {
 
 
 
-// Register User
+// Get User Details
 const getUserDetails = (id) => async( token, getState ) => {
     const { userLogin: { userInfo }} = getState()
 
@@ -43,6 +43,24 @@ const getUserDetails = (id) => async( token, getState ) => {
     return response.data
 }
 
+
+
+
+
+// UpdateUserProfile
+const updateUserProfile = (user) => async( token, getState ) => {
+    const { userLogin: { userInfo }} = getState()
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+        },
+    }
+
+
+    const response = await axios.put(`${Base_URL}/api/users/profile`, user, config)
+    return response.data
+}
 
 
 
@@ -65,7 +83,8 @@ const authService = {
     login,
     logout,
     register,
-    getUserDetails
+    getUserDetails,
+    updateUserProfile
 }
 
 

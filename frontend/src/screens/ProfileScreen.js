@@ -7,7 +7,8 @@ import Loader from "../components/Loader";
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
-import { getUserDetails } from "../features/auth/authSlice";
+import { getUserDetails, updateUserProfile } from "../features/auth/authSlice";
+
 
 const ProfileScreen = () => {
     const dispatch = useDispatch()
@@ -15,10 +16,15 @@ const ProfileScreen = () => {
     const navigate = useNavigate()
 
     const userProfileDetails = useSelector((state) => state.userDetails);
-    const { isLoading, isError, isSuccess, message } = userProfileDetails
+    const { isLoading, isError, message } = userProfileDetails
+
 
     const userLoginDetails = useSelector((state) => state.userLogin);
     const { userInfo } = userLoginDetails
+
+
+    const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+    const { isSuccess } = userUpdateProfile
 
 
     const [formData, setFormData] = useState({
@@ -61,7 +67,7 @@ const ProfileScreen = () => {
     if(password !== confirm_password) {
         setText('Password do not match')
     } else {
-        dispatch()
+        dispatch(updateUserProfile({ id: userInfo._id, name, email, password }))
     }
   };
 
@@ -72,6 +78,7 @@ const ProfileScreen = () => {
           <h2>User Profile</h2>
           {text && <Message variant='danger'>{text}</Message>}
           {isError && <Message variant='danger'>{message}</Message>}
+          {isSuccess && <Message variant='success'>Profile Updated</Message>}
           {isLoading && <Loader />}
 
 
