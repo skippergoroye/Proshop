@@ -64,14 +64,8 @@ export const productsSlice = createSlice({
     },
     extraReducers: (builder)=>{
         builder
-            .addCase(getProducts.pending, (state)=>{
-                state.isLoading = true
-            })
-            .addCase(getProducts.rejected, (state, action)=>{
-                state.isLoading = false
-                state.isError = true
-                state.isSuccess = false
-                state.message = action.payload
+            .addCase(getProducts.pending, (state) => {
+              state.isLoading = true
             })
             .addCase(getProducts.fulfilled, (state, action)=>{
                 state.isLoading = false
@@ -79,22 +73,28 @@ export const productsSlice = createSlice({
                 state.isSuccess = true
                 state.products = action.payload
             })
-
-            
-            .addCase(getSingleProducts.pending, (state)=>{
-                state.isLoading = true
-            })
-            .addCase(getSingleProducts.rejected, (state, action)=>{
+            .addCase(getProducts.rejected, (state, action)=>{
                 state.isLoading = false
                 state.isError = true
                 state.isSuccess = false
                 state.message = action.payload
             })
-            .addCase(getSingleProducts.fulfilled, (state, action)=>{
+
+            
+            .addCase(getSingleProducts.pending, (state)=>{
+                state.isLoading = true
+              })
+              .addCase(getSingleProducts.fulfilled, (state, action)=>{
+                  state.isLoading = false
+                  state.isError = false
+                  state.isSuccess = true
+                  state.product = action.payload
+              })
+            .addCase(getSingleProducts.rejected, (state, action)=>{
                 state.isLoading = false
-                state.isError = false
-                state.isSuccess = true
-                state.product = action.payload
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
             })
     }
 })

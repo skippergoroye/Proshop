@@ -6,6 +6,7 @@ import userLoginReducer from '../features/auth/authSlice'
 import userRegisterReducer from '../features/auth/authSlice'
 import userDetailsReducer from '../features/auth/authSlice'
 import userUpdateProfileReducer from '../features/auth/authSlice' 
+import orderCreateReducer from '../features/order/orderSlice'
 // import shippingAddressReducer from '../features/auth/authSlice'
 
 
@@ -18,6 +19,7 @@ export const store = configureStore ({
         userRegister: userRegisterReducer,
         userDetails: userDetailsReducer,
         userUpdateProfile: userUpdateProfileReducer,
+        orderCreate: orderCreateReducer,
         // shippingAddress: shippingAddressReducer
     }
 })

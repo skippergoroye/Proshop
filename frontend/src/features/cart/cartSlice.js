@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const cartItemsFromStorage = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart"))
+  ? JSON.parse(localStorage.getItem('cart'))
   : [];
 
 
@@ -11,10 +11,18 @@ const cartItemsFromStorage = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem('shippingAddress'))
   : {};
 
+  // To get the payment type without Having to click it...... To save Payment type in local storage
+  // const payFromStorage = localStorage.getItem("paymentMethod")
+  // ? JSON.parse(localStorage.getItem('paymentMethod'))
+  // : {};
+
+
+
 
 const initialState = {
-  cart: cartItemsFromStorage,
+  cartItems: cartItemsFromStorage,
   shippingAddress: shippingAddressFromStorage,
+  // paymentMethod: payFromStorage,
 };
 
 
@@ -36,19 +44,23 @@ export const cartSlice = createSlice({
           }
         }
       },
-
       removeItem: (state, action) => {
         console.log(action)
         const itemId = action.payload
         state.cart = state.cart.filter((item) => item._id !== itemId);
         localStorage.setItem('cart', JSON.stringify(state.cart))
       },
-
       saveShippingAddress: (state, action) => {
         console.log(action)
         const data = action.payload;
         state.shippingAddress = data;
         localStorage.setItem('shippingAddress', JSON.stringify(data))
+      },
+      savePaymentMethod: (state, action) => {
+        console.log(action)
+        const data = action.payload;
+        state.paymentMethod = data;
+        localStorage.setItem('paymentMethod', JSON.stringify(data))
       },
     },
   extraReducers: (builder) => {
@@ -56,6 +68,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { reset, addItem, removeItem, saveShippingAddress } = cartSlice.actions;
+export const { reset, addItem, removeItem, saveShippingAddress, savePaymentMethod } = cartSlice.actions;
 
 export default cartSlice.reducer;

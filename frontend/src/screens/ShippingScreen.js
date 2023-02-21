@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps"
@@ -8,6 +8,9 @@ import { saveShippingAddress } from '../features/cart/cartSlice';
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 
+
+
+
 const ShippingScreen = () => {
 
   const navigate = useNavigate()
@@ -15,9 +18,6 @@ const ShippingScreen = () => {
   const cart = useSelector((state) => state.cart)
   const { shippingAddress } = cart
 
-
-  
-  
   const [address, setAddress] = useState(shippingAddress.address)
   const [city, setCity] = useState(shippingAddress.city)
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode)
