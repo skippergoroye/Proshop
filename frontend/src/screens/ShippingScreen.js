@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps"
-import saveShippingAddress from '../features/cart/cartSlice'
+import { saveShippingAddress } from '../features/cart/cartSlice';
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -16,14 +16,14 @@ const ShippingScreen = () => {
   const { shippingAddress } = cart
 
 
-  const dispatch = useDispatch()
-
-
+  
+  
   const [address, setAddress] = useState(shippingAddress.address)
   const [city, setCity] = useState(shippingAddress.city)
-  const [postalCode, setPostalcode] = useState(shippingAddress.postalCode)
+  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode)
   const [country, setCountry] = useState(shippingAddress.country)
-
+  
+  const dispatch = useDispatch()
   // const [formData, setFormData] = useState({
   //   address: '',
   //   city: '',
@@ -50,8 +50,6 @@ const ShippingScreen = () => {
   }
 
 
-
-
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 />
@@ -65,7 +63,7 @@ const ShippingScreen = () => {
                 value={address}
                 placeholder="Enter Address"
                 required
-                onChnage={(e) => setAddress(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
                 // onChange={onChange}
                 ></Form.Control>
             </Form.Group>
@@ -92,7 +90,7 @@ const ShippingScreen = () => {
                 value={postalCode}
                 placeholder="Enter Postal Code"
                 required
-                onChange={(e) => setPostalcode(e.target.value)}
+                onChange={(e) => setPostalCode(e.target.value)}
                 // onChange={onChange}
                 ></Form.Control>
             </Form.Group>

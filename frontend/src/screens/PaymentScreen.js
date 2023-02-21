@@ -1,129 +1,55 @@
-import React, { useState } from "react";
-import { Form, Button, Col } from "react-bootstrap";
-import FormContainer from "../components/FormContainer";
-import CheckoutSteps from "../components/CheckoutSteps"
+import { useState, useEffect } from 'react'
+import { Form, Button, Col } from 'react-bootstrap'
+import FormContainer from '../components/FormContainer'
+import { useNavigate } from 'react-router-dom'
+import CheckoutSteps from '../components/CheckoutSteps'
 
 
-import savePaymentMethod from '../features/cart/cartSlice'
-import { useLocation, useNavigate } from "react-router-dom";
-
-//Redux
-import { useDispatch, useSelector } from "react-redux";
-
-const PaymentScreen = () => {
-
+const Paymentscreen = () => {
   const navigate = useNavigate()
+  const [paymentMethod, setPaymentMethod] = useState('PayPal')
 
-  const cart = useSelector((state) => state.cart)
-  const { shippingAddress } = cart
+  useEffect(() => {
+    const shippingDetails = JSON.parse(localStorage.getItem('shippingAddress'))
+    if (!shippingDetails.address) {
+      navigate('/shipping')
+    }
+  }, [])
 
-
-  if(!shippingAddress) {
-    navigate('/shipping')
-  }
-
-
-  const dispatch = useDispatch()
-
-
-  const [address, setAddress] = useState(shippingAddress.address)
-  const [city, setCity] = useState(shippingAddress.city)
-  const [postalCode, setPostalcode] = useState(shippingAddress.postalCode)
-  const [country, setCountry] = useState(shippingAddress.country)
-
-  // const [formData, setFormData] = useState({
-  //   address: '',
-  //   city: '',
-  //   postalCode: '',
-  //   country: '',
-  // })
-
-  // const { address, city, postalCode, country } = formData
-
-
-  // const onChange = (e) => {
-  //   setFormData((prevState) => ({
-  //     ...prevState,
-  //     [e.target.name]: [e.target.value]
-  //   }))
-  // }
-
-  
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault()
-    dispatch(saveShippingAddress({ address, city, postalCode, country }))
-    navigate('/payment')
-    console.log('submit')
+    localStorage.setItem('paymentMethod', paymentMethod)
+    navigate('/placeorder')
   }
-
-
-
 
   return (
     <FormContainer>
-      <CheckoutSteps step1 step2 />
-      <h1>Shipping</h1>
+      <CheckoutSteps step1 step2 step3 />
+      <h1>Payment Method</h1>
       <Form onSubmit={submitHandler}>
-            <Form.Group controlId="address">
-              <Form.Label>Address</Form.Label>
-                <Form.Control 
-                type="text" 
-                name="address"
-                value={address}
-                placeholder="Enter Address"
-                required
-                onChnage={(e) => setAddress(e.target.value)}
-                // onChange={onChange}
-                ></Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId="city">
-              <Form.Label>City</Form.Label>
-                <Form.Control 
-                type="text" 
-                name="city"
-                value={city}
-                placeholder="Enter City"
-                required
-                onChange={(e) => setCity(e.target.value)}
-                // onChange={onChange}
-                ></Form.Control>
-            </Form.Group>
-
-
-            <Form.Group controlId="postalCode">
-              <Form.Label>Postal Code</Form.Label>
-                <Form.Control 
-                type="text" 
-                name="postalCode"
-                value={postalCode}
-                placeholder="Enter Postal Code"
-                required
-                onChange={(e) => setPostalcode(e.target.value)}
-                // onChange={onChange}
-                ></Form.Control>
-            </Form.Group>
-
-            
-            <Form.Group controlId="country">
-              <Form.Label>Country</Form.Label>
-                <Form.Control 
-                type="text" 
-                name="country"
-                value={country}
-                placeholder="Enter Country"
-                required
-                onChange={(e) => setCountry(e.target.value)}
-                // onChange={onChange}
-                ></Form.Control>
-            </Form.Group>
-
-            <Button type='submit' variant='primary'>
-              Continue
-            </Button>
+        <Form.Group>
+          <Form.Label as="legend">Select Method</Form.Label>
+        <Col>
+          <Form.Check
+            type="radio"
+            label="PayPal or Credit-Card"
+            id="PayPal"
+            name="PaymentMethod"
+            value="PayPal"
+            checked
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          ></Form.Check>
+        </Col>
+       
+        </Form.Group>
+        <Button type="submit" variant="primary" className="my-3">
+          Continue
+        </Button>
+        
       </Form>
     </FormContainer>
   )
 }
 
-export default PaymentScreen
+export default Paymentscreen
+

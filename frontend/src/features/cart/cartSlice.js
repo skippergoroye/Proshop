@@ -36,6 +36,7 @@ export const cartSlice = createSlice({
           }
         }
       },
+
       removeItem: (state, action) => {
         console.log(action)
         const itemId = action.payload
@@ -43,9 +44,10 @@ export const cartSlice = createSlice({
         localStorage.setItem('cart', JSON.stringify(state.cart))
       },
 
-      saveShippingAddress: (state, action, data) => {
+      saveShippingAddress: (state, action) => {
         console.log(action)
-        const itemId = action.payload
+        const data = action.payload;
+        state.shippingAddress = data;
         localStorage.setItem('shippingAddress', JSON.stringify(data))
       },
     },
